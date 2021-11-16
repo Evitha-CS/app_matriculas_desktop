@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "40215885245",
+    "project_id": "lector-patentes",
+    "storage_bucket": "lector-patentes.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40215885245:android:4f7843ed33e148c48fced4",
+        "android_client_info": {
+          "package_name": "com.rafamsuarez.app_matriculas_desktop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40215885245-o5el89rqnguaqe8hdbd5s49et153s3ao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMfmxVgQk8NWrRoSC-DvOgUTe1VE7OT38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40215885245-o5el89rqnguaqe8hdbd5s49et153s3ao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40215885245:android:4df7c8b33edf163f8fced4",
+        "android_client_info": {
+          "package_name": "com.rafamsuarez.app_patentes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40215885245-o5el89rqnguaqe8hdbd5s49et153s3ao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMfmxVgQk8NWrRoSC-DvOgUTe1VE7OT38"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40215885245-o5el89rqnguaqe8hdbd5s49et153s3ao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
