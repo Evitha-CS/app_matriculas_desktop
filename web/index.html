@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -27,11 +28,12 @@
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="icon" type="image/png" href="favicon.png" />
 
   <title>app_matriculas_desktop</title>
   <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
@@ -101,4 +103,24 @@
     }
   </script>
 </body>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+
+
+<script>
+  var firebaseConfig = {
+    apiKey: "AIzaSyDZhSEA2IxtwDlIMZma9NDGNcNGsEoDRdY",
+    authDomain: "lector-patentes.firebaseapp.com",
+    projectId: "lector-patentes",
+    storageBucket: "lector-patentes.appspot.com",
+    messagingSenderId: "40215885245",
+    appId: "1:40215885245:web:19baac88903103988fced4"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+
+
+</script>
+
 </html>

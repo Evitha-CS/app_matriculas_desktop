@@ -9,17 +9,29 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(AppMatriculasDesktop());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(AppMatriculasDesktop());
+}
 
-class AppMatriculasDesktop extends StatelessWidget {
-  const AppMatriculasDesktop({Key? key}) : super(key: key);
+class AppMatriculasDesktop extends StatefulWidget {
+  const AppMatriculasDesktop({ Key? key }) : super(key: key);
+
+  @override
+  _AppMatriculasDesktopState createState() => _AppMatriculasDesktopState();
+}
+
+class _AppMatriculasDesktopState extends State<AppMatriculasDesktop> {
+
+  final Future<FirebaseApp> _inicio = Firebase.initializeApp();
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Firebase.initializeApp(),
+      future: _inicio,
       builder: (context, snapshot) {
         if (snapshot.hasError) {
+          print(snapshot.error.toString());
           return ErrorPosible();
         }
         if (snapshot.connectionState == ConnectionState.done) {

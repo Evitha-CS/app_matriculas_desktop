@@ -18,22 +18,6 @@ class _HomeState extends State<Home> {
   bool _loading = false;
   int _indexMenu = 0;
 
-  final List<Color> _colores = [
-    Color(0xff3D56B2), //appbar y bottom bar
-    Colors.white //fondo scaffold
-  ];
-  Color getColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-    };
-    if (states.any(interactiveStates.contains)) {
-      return Colors.blue;
-    }
-    return Colors.red;
-  }
-
   void _onTap(index) {
     if (index == 1) {
       _auth.signOut();
@@ -45,55 +29,66 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    double ancho = MediaQuery.of(context).size.width;
+    double alto = MediaQuery.of(context).size.height;
+
     return StreamProvider<List<Matricula>?>.value(
       value: DatabaseService().matriculas(),
       initialData: null,
       catchError: (_, err) => null,
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: _colores[1],
+        backgroundColor: Colors.white,
         //appbar
         appBar: AppBar(
             title: Text(
-              'Matriculas',
+              'Matriculas Estacionamiento UBB',
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 1),
             ),
-            // centerTitle: true,
+            centerTitle: true,
             elevation: 0,
-            backgroundColor: _colores[0]),
+            backgroundColor: Color(0xff3D56B2)),
         //body
         body: _loading
             ? SpinKitFadingCircle(
                 color: Colors.red[800],
                 size: 100,
               )
-            : ListaMatriculas(),
+            : Row(
+              children: [
+                Expanded(child: ListaMatriculas()),
+                Container(
+                  width: ancho * 0.4,
+                  color: Colors.green,
+                )
+              ],
+            ),
         extendBody: true,
-        bottomNavigationBar: BottomAppBar(
-          color: _colores[0],
-          elevation: 0,
-          child: BottomNavigationBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.white,
-            items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Buscar',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.logout),
-                label: 'Cerrar Sesión',
-              ),
-            ],
-            currentIndex: _indexMenu,
-            onTap: _onTap,
-          ),
-        ),
+        // bottomNavigationBar: BottomAppBar(
+        //   color: Color(0xff3D56B2),
+        //   elevation: 0,
+        //   child: BottomNavigationBar(
+        //     backgroundColor: Colors.transparent,
+        //     elevation: 0,
+        //     selectedItemColor: Colors.white,
+        //     unselectedItemColor: Colors.white,
+        //     items: [
+        //       BottomNavigationBarItem(
+        //         icon: Icon(Icons.search),
+        //         label: 'Buscar',
+        //       ),
+        //       BottomNavigationBarItem(
+        //         icon: Icon(Icons.logout),
+        //         label: 'Cerrar Sesión',
+        //       ),
+        //     ],
+        //     currentIndex: _indexMenu,
+        //     onTap: _onTap,
+        //   ),
+        // ),
       ),
     );
   }
