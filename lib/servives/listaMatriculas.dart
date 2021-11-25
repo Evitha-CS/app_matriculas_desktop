@@ -81,6 +81,7 @@ class _ListaMatriculasState extends State<ListaMatriculas> {
       itemCount: matriculas.length,
       itemBuilder: (context, index) {
         return InkWell(
+          borderRadius: BorderRadius.circular(25),
           child: display(context, index, matriculas),
           onLongPress: () async {
             await _borrarMatriculas(index, matriculas);

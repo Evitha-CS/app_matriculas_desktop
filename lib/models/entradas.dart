@@ -11,6 +11,6 @@ List<EntradasUni> entradas = [
   EntradasUni(entrada: 'E1', color: Color(0xffB5EAEA)),
   EntradasUni(entrada: 'E2', color: Color(0xffFBAFAF)),
   EntradasUni(entrada: 'E3', color: Color(0xff99DDCC)),
-  EntradasUni(entrada: 'E4', color: Color(0xffEFF8FF)),
+  EntradasUni(entrada: 'E4', color: Color(0xffEADEDE)),
   EntradasUni(entrada: 'E5', color: Color(0xffF2AE72)),
 ];

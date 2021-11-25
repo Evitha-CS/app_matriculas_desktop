@@ -81,7 +81,7 @@ class _BuscarState extends State<Buscar> {
           ),
           StreamProvider<List<Matricula>?>.value(
             value: _nombre
-                ? DatabaseService().buscarMatriculaNombre(_buscar.toString())
+                ? DatabaseService().buscarMatriculaMarca(_buscar.toString())
                 : DatabaseService().buscarMatricula(_buscar.toString()),
             initialData: null,
             catchError: (_, err) => null,

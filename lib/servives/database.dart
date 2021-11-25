@@ -24,19 +24,28 @@ class DatabaseService {
     }).toList();
   }
 
-  Stream<List<Matricula>> matriculas() {
+  Stream<List<Matricula>> matriculasEntrada() {
     return coleccionMatriculas
-        .orderBy('hora', descending: true)
+        .where('salida', isEqualTo: false)
+        // .orderBy('hora', descending: true)
         .snapshots()
         .map(_matriculaFromSnapshot);
   }
 
-  Stream<List<Matricula>> buscarMatriculaNombre(String matriculaNombre) {
+  Stream<List<Matricula>> matriculasSalida() {
+    return coleccionMatriculas
+        // .orderBy('hora', descending: true)
+        .where('salida', isEqualTo: true)
+        .snapshots()
+        .map(_matriculaFromSnapshot);
+  }
+
+  Stream<List<Matricula>> buscarMatriculaMarca(String matriculaNombre) {
     return matriculaNombre.isEmpty
         ? Stream.empty()
         : coleccionMatriculas
-            .where('nombre', isGreaterThanOrEqualTo: matriculaNombre)
-            .where('nombre', isLessThan: matriculaNombre + 'z')
+            .where('marca', isGreaterThanOrEqualTo: matriculaNombre)
+            .where('marca', isLessThan: matriculaNombre + 'z')
             .snapshots()
             .map(_matriculaFromSnapshot);
   }
