@@ -1,5 +1,6 @@
 import 'package:app_matriculas_desktop/servives/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -26,8 +27,9 @@ class _SignUpState extends State<SignUp> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/spikes.png'), repeat: ImageRepeat.repeat),
-              //Background pattern from Toptal Subtle Patterns 
+              image: AssetImage('assets/spikes.png'),
+              repeat: ImageRepeat.repeat),
+          //Background pattern from Toptal Subtle Patterns
         ),
         child: Align(
           alignment: Alignment.topCenter,
@@ -74,6 +76,7 @@ class _SignUpState extends State<SignUp> {
                             email = val;
                           });
                         },
+                        textInputAction: TextInputAction.next,
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(
                               horizontal: 15, vertical: 10),
@@ -100,6 +103,17 @@ class _SignUpState extends State<SignUp> {
                           setState(() {
                             password = val;
                           });
+                        },
+                        onFieldSubmitted: (val) async {
+                          if (_formkey.currentState!.validate()) {
+                            dynamic result = await _auth.signInEmailPassword(
+                                email, password);
+                            if (result == null) {
+                              setState(() {
+                                error = 'Usuario o contraseña incorrecta';
+                              });
+                            }
+                          }
                         },
                         decoration: InputDecoration(
                           contentPadding: EdgeInsets.symmetric(
