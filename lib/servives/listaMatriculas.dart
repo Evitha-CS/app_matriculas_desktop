@@ -13,6 +13,7 @@ class ListaMatriculas extends StatefulWidget {
 
 class _ListaMatriculasState extends State<ListaMatriculas> {
   final _databaseService = DatabaseService();
+  final _controller = ScrollController();
 
   Future _borrarMatriculas(int index, List<Matricula> lista) async {
     return showDialog<void>(
@@ -30,8 +31,7 @@ class _ListaMatriculasState extends State<ListaMatriculas> {
                     style: TextStyle(fontSize: 20),
                   ),
                   Padding(
-                    padding:
-                        const EdgeInsets.fromLTRB(5,30,5,10),
+                    padding: const EdgeInsets.fromLTRB(5, 30, 5, 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -47,7 +47,8 @@ class _ListaMatriculasState extends State<ListaMatriculas> {
                         ),
                         ElevatedButton(
                           onPressed: () async {
-                            await _databaseService.borrarMatricula(lista[index].uid);
+                            await _databaseService
+                                .borrarMatricula(lista[index].uid);
                             Navigator.of(context).pop();
                           },
                           child: Text(
@@ -73,21 +74,38 @@ class _ListaMatriculasState extends State<ListaMatriculas> {
 
   @override
   Widget build(BuildContext context) {
-    final matriculas = Provider.of<List<Matricula>?>(context) ?? [];
+    // final matriculas = Provider.of<List<Matricula>?>(context) ?? [];
+    final matriculas = List<Matricula>.generate(30, (int i) => Matricula(
+        matricula: 'matricula $i',
+        modelo: 'modelo',
+        hora: DateTime.now().toString(),
+        marca: 'marca',
+        color: 'color',
+        entrada: 'E1',
+        uid: 'uid',
+        sospecha: false,
+        salida: false
+      ),);
 
-    return ListView.builder(
-      padding: EdgeInsets.fromLTRB(10, 15, 10, 100),
-      physics: BouncingScrollPhysics(),
-      itemCount: matriculas.length,
-      itemBuilder: (context, index) {
-        return InkWell(
-          borderRadius: BorderRadius.circular(25),
-          child: display(context, index, matriculas),
-          onLongPress: () async {
-            await _borrarMatriculas(index, matriculas);
-          },
-        );
-      },
+    return Scrollbar(
+      isAlwaysShown: true,
+      thickness: 15,
+      controller: _controller,
+      child: ListView.builder(
+        controller: _controller,
+        padding: EdgeInsets.fromLTRB(10, 15, 10, 100),
+        physics: BouncingScrollPhysics(),
+        itemCount: matriculas.length,
+        itemBuilder: (context, index) {
+          return InkWell(
+            borderRadius: BorderRadius.circular(25),
+            child: displayMatricula(context, index, matriculas),
+            onLongPress: () async {
+              await _borrarMatriculas(index, matriculas);
+            },
+          );
+        },
+      ),
     );
   }
 }

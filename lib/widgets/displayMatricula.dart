@@ -2,7 +2,7 @@ import 'package:app_matriculas_desktop/models/entradas.dart';
 import 'package:app_matriculas_desktop/models/matricula.dart';
 import 'package:flutter/material.dart';
 
-Widget display(BuildContext context, int index, List<Matricula> lista) {
+Widget displayMatricula(BuildContext context, int index, List<Matricula> lista) {
   final double alto = MediaQuery.of(context).size.height;
   final double ancho = MediaQuery.of(context).size.width;
 
@@ -10,7 +10,7 @@ Widget display(BuildContext context, int index, List<Matricula> lista) {
       entradas.firstWhere((e) => e.entrada == lista[index].entrada);
 
   return Padding(
-    padding: const EdgeInsets.only(bottom: 10),
+    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
     child: Container(
       width: ancho * 0.8,
       height: alto * 0.15,
@@ -27,26 +27,26 @@ Widget display(BuildContext context, int index, List<Matricula> lista) {
             children: [
               CircleAvatar(
                 backgroundColor: _entrada.color,
-                radius: alto * 0.045,
+                radius: alto * 0.055,
                 child: Center(
                   child: Text(
                     '${_entrada.entrada}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.grey[800],
-                      fontSize: 25,
+                      fontSize: 35,
                     ),
                   ),
                 ),
               ),
               Flexible(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //Matricula texto etc
+                      //Matricula texto y hora
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -57,18 +57,30 @@ Widget display(BuildContext context, int index, List<Matricula> lista) {
                                   ? Colors.red
                                   : Colors.black,
                               fontWeight: FontWeight.bold,
-                              fontSize: 19,
+                              fontSize: 23,
+                            ),
+                          ),
+                          Text(
+                            lista[index].salida!
+                                ? '\u{2B07} Vehículo saliendo'
+                                : '\u{2B06} Vehículo entrando',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              letterSpacing: 2,
                             ),
                           ),
                           Text(
                             '${lista[index].hora.toString()}',
-                            style: TextStyle(fontSize: 14),
+                            style: TextStyle(fontSize: 18),
                           ),
                         ],
                       ),
+
+                      // desc del vehiculo
                       Text(
                         '${lista[index].marca.toString()} - ${lista[index].modelo.toString()} (${lista[index].color.toString()})',
-                        style: TextStyle(fontSize: 15),
+                        style: TextStyle(fontSize: 18),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ],

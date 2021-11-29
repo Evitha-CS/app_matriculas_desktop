@@ -1,6 +1,5 @@
 import 'package:app_matriculas_desktop/servives/auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);

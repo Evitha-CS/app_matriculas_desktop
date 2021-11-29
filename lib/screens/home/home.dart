@@ -1,7 +1,9 @@
 import 'package:app_matriculas_desktop/models/matricula.dart';
+import 'package:app_matriculas_desktop/screens/buscar.dart';
 import 'package:app_matriculas_desktop/servives/auth.dart';
 import 'package:app_matriculas_desktop/servives/database.dart';
 import 'package:app_matriculas_desktop/servives/listaMatriculas.dart';
+import 'package:app_matriculas_desktop/widgets/displayOpciones.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
@@ -16,16 +18,17 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final _auth = AuthService();
   bool _loading = false;
+  bool _buscar = false;
   int _indexMenu = 0;
 
-  void _onTap(index) {
-    if (index == 1) {
-      _auth.signOut();
-    }
-    if (index == 0) {
-      Navigator.pushNamed(context, '/buscar');
-    }
-  }
+  // void _onTap(index) {
+  //   if (index == 1) {
+  //     _auth.signOut();
+  //   }
+  //   if (index == 0) {
+  //     Navigator.pushNamed(context, '/buscar');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +48,7 @@ class _HomeState extends State<Home> {
                 letterSpacing: 1),
           ),
           centerTitle: true,
-          elevation: 0,
+          elevation: 2,
           backgroundColor: Color(0xff3D56B2)),
       //body
       body: _loading
@@ -55,75 +58,94 @@ class _HomeState extends State<Home> {
             )
           : Row(
               children: [
-                SizedBox(
-                  width: ancho * 0.5,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Matriculas de Entrada',
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold, letterSpacing: 2),
+                Container(
+                  width: ancho * 0.17,
+                  decoration: BoxDecoration(
+                    color: Color(0xff90AACB),
+                    // border: Border(right: BorderSide(color: Color(0xff334756), width: 4))
+                  ),
+                  child: Column(
+                    children: [
+                      InkWell(
+                        child: displayOpciones(
+                            context, 'Lista Matrículas', !_buscar),
+                        onTap: () {
+                          _buscar = false;
+                          setState(() {});
+                        },
+                      ),
+                      InkWell(
+                        child: displayOpciones(
+                            context, 'Buscar Matrículas', _buscar),
+                        onTap: () {
+                          _buscar = true;
+                          setState(() {});
+                        },
+                      ),
+                      InkWell(
+                        child: displayOpciones(context, 'Generar Excel', false),
+                        onTap: () {},
+                      ),
+                      Expanded(
+                        child: Align(
+                          alignment: Alignment.bottomLeft,
+                          child: InkWell(
+                            child: displayOpciones(context, 'Cerrar Sesión', false),
+                            onTap: () async {
+                              await _auth.signOut();
+                            },
+                          ),
                         ),
-                        Expanded(
-                          child: StreamProvider<List<Matricula>?>.value(
-                              value: DatabaseService().matriculasEntrada(),
-                              initialData: null,
-                              catchError: (_, err) => null,
-                              child: ListaMatriculas()),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(
-                  width: ancho * 0.5,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Matriculas de Salida',
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold, letterSpacing: 2),
+                _buscar
+                    ? Buscar()
+                    : Expanded(
+                        child: Center(
+                          child: SizedBox(
+                            width: ancho * 0.5,
+                            child: Column(
+                              children: [
+                                Expanded(child: ListaMatriculas()),
+                                // Expanded(
+                                //   child: StreamProvider<List<Matricula>?>.value(
+                                //       value: DatabaseService().matriculas(),
+                                //       initialData: null,
+                                //       catchError: (_, err) => null,
+                                //       child: ListaMatriculas()),
+                                // ),
+                              ],
+                            ),
+                          ),
                         ),
-                        Expanded(
-                          child: StreamProvider<List<Matricula>?>.value(
-                              value: DatabaseService().matriculasSalida(),
-                              initialData: null,
-                              catchError: (_, err) => null,
-                              child: ListaMatriculas()),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                      ),
               ],
             ),
       extendBody: true,
-      bottomNavigationBar: BottomAppBar(
-        color: Color(0xff3D56B2),
-        elevation: 0,
-        child: BottomNavigationBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          selectedItemColor: Colors.white,
-          unselectedItemColor: Colors.white,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Buscar',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.logout),
-              label: 'Cerrar Sesión',
-            ),
-          ],
-          currentIndex: _indexMenu,
-          onTap: _onTap,
-        ),
-      ),
+      // bottomNavigationBar: BottomAppBar(
+      //   color: Color(0xff3D56B2),
+      //   elevation: 0,
+      //   child: BottomNavigationBar(
+      //     backgroundColor: Colors.transparent,
+      //     elevation: 0,
+      //     selectedItemColor: Colors.white,
+      //     unselectedItemColor: Colors.white,
+      //     items: [
+      //       BottomNavigationBarItem(
+      //         icon: Icon(Icons.search),
+      //         label: 'Buscar',
+      //       ),
+      //       BottomNavigationBarItem(
+      //         icon: Icon(Icons.logout),
+      //         label: 'Cerrar Sesión',
+      //       ),
+      //     ],
+      //     currentIndex: _indexMenu,
+      //     onTap: _onTap,
+      //   ),
+      // ),
     );
   }
 }

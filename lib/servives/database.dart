@@ -20,8 +20,16 @@ class DatabaseService {
         entrada: doc.get('entrada').toString(),
         sospecha: doc.get('sospecha'),
         uid: doc.id.toString(),
+        salida: doc.get('salida'),
       );
     }).toList();
+  }
+
+  Stream<List<Matricula>> matriculas() {
+    return coleccionMatriculas
+        .orderBy('hora', descending: true)
+        .snapshots()
+        .map(_matriculaFromSnapshot);
   }
 
   Stream<List<Matricula>> matriculasEntrada() {

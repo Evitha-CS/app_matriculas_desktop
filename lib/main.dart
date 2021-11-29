@@ -40,13 +40,8 @@ class _AppMatriculasDesktopState extends State<AppMatriculasDesktop> {
             value: AuthService().user,
             initialData: null,
             child: MaterialApp(
-              routes: {
-                '/wrapper': (context) => Wrapper(),
-                '/home': (context) => Home(),
-                '/buscar': (context) => Buscar(),
-              },
               debugShowCheckedModeBanner: false,
-              initialRoute: '/wrapper',
+              home: Wrapper(),
             ),
           );
         }
