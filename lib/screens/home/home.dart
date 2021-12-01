@@ -51,101 +51,100 @@ class _HomeState extends State<Home> {
           elevation: 2,
           backgroundColor: Color(0xff3D56B2)),
       //body
-      body: _loading
-          ? SpinKitFadingCircle(
-              color: Colors.red[800],
-              size: 100,
-            )
-          : Row(
-              children: [
-                Container(
-                  width: ancho * 0.17,
-                  decoration: BoxDecoration(
-                    color: Color(0xff90AACB),
-                    // border: Border(right: BorderSide(color: Color(0xff334756), width: 4))
-                  ),
-                  child: Column(
-                    children: [
-                      InkWell(
-                        child: displayOpciones(
-                            context, 'Lista Matrículas', !_buscar),
-                        onTap: () {
-                          _buscar = false;
-                          setState(() {});
-                        },
-                      ),
-                      InkWell(
-                        child: displayOpciones(
-                            context, 'Buscar Matrículas', _buscar),
-                        onTap: () {
-                          _buscar = true;
-                          setState(() {});
-                        },
-                      ),
-                      InkWell(
-                        child: displayOpciones(context, 'Generar Excel', false),
-                        onTap: () {},
-                      ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: InkWell(
-                            child: displayOpciones(context, 'Cerrar Sesión', false),
-                            onTap: () async {
-                              await _auth.signOut();
-                            },
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage('papyrus.png'), repeat: ImageRepeat.repeat)
+        ),
+        child: _loading
+            ? SpinKitFadingCircle(
+                color: Colors.red[800],
+                size: 100,
+              )
+            : Row(
+                children: [
+                  Container(
+                    width: ancho * 0.15,
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border(
+                            right: BorderSide(color: Colors.black, width: 2))),
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 20,
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                _buscar
-                    ? Buscar()
-                    : Expanded(
-                        child: Center(
                           child: SizedBox(
-                            width: ancho * 0.5,
-                            child: Column(
-                              children: [
-                                Expanded(child: ListaMatriculas()),
-                                // Expanded(
-                                //   child: StreamProvider<List<Matricula>?>.value(
-                                //       value: DatabaseService().matriculas(),
-                                //       initialData: null,
-                                //       catchError: (_, err) => null,
-                                //       child: ListaMatriculas()),
-                                // ),
-                              ],
+                            height: alto * 0.2,
+                            child: Image(
+                              image: AssetImage('logo-ubb.png'),
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
-                      ),
-              ],
-            ),
+                        Divider(),
+                        InkWell(
+                          child: displayOpciones(
+                              context, 'Lista Matrículas', !_buscar),
+                          onTap: () {
+                            _buscar = false;
+                            setState(() {});
+                          },
+                        ),
+                        InkWell(
+                          child: displayOpciones(
+                              context, 'Buscar Matrículas', _buscar),
+                          onTap: () {
+                            _buscar = true;
+                            setState(() {});
+                          },
+                        ),
+                        InkWell(
+                          child: displayOpciones(context, 'Generar Excel', false),
+                          onTap: () {},
+                        ),
+                        Divider(),
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.bottomLeft,
+                            child: InkWell(
+                              child: displayOpciones(
+                                  context, 'Cerrar Sesión', false),
+                              onTap: () async {
+                                await _auth.signOut();
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  _buscar
+                      ? Buscar()
+                      : Expanded(
+                          child: Center(
+                            child: SizedBox(
+                              width: ancho * 0.5,
+                              child: Column(
+                                children: [
+                                  Expanded(child: ListaMatriculas()),
+                                  // Expanded(
+                                  //   child: StreamProvider<List<Matricula>?>.value(
+                                  //       value: DatabaseService().matriculas(),
+                                  //       initialData: null,
+                                  //       catchError: (_, err) => null,
+                                  //       child: ListaMatriculas()),
+                                  // ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                ],
+              ),
+      ),
       extendBody: true,
-      // bottomNavigationBar: BottomAppBar(
-      //   color: Color(0xff3D56B2),
-      //   elevation: 0,
-      //   child: BottomNavigationBar(
-      //     backgroundColor: Colors.transparent,
-      //     elevation: 0,
-      //     selectedItemColor: Colors.white,
-      //     unselectedItemColor: Colors.white,
-      //     items: [
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.search),
-      //         label: 'Buscar',
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.logout),
-      //         label: 'Cerrar Sesión',
-      //       ),
-      //     ],
-      //     currentIndex: _indexMenu,
-      //     onTap: _onTap,
-      //   ),
-      // ),
     );
   }
 }

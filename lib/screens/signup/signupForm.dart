@@ -26,24 +26,24 @@ class _SignUpState extends State<SignUp> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('assets/spikes.png'),
+              image: AssetImage('spikes.png'),
               repeat: ImageRepeat.repeat),
           //Background pattern from Toptal Subtle Patterns
         ),
         child: Align(
           alignment: Alignment.topCenter,
           child: Padding(
-            padding: const EdgeInsets.only(top: 30),
+            padding: const EdgeInsets.only(top: 20),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 border: Border.all(width: 3, color: Colors.grey),
                 color: Colors.white,
               ),
-              width: ancho * 0.35,
-              height: alto * 0.58,
+              width: ancho * 0.28,
+              height: alto * 0.52,
               child: Padding(
-                padding: EdgeInsets.fromLTRB(30, 40, 30, 20),
+                padding: EdgeInsets.fromLTRB(30, 30, 30, 0),
                 child: Form(
                   key: _formkey,
                   child: Column(
@@ -53,20 +53,20 @@ class _SignUpState extends State<SignUp> {
                       Text(
                         'Iniciar Sesión',
                         style: TextStyle(
-                          fontSize: 40,
+                          fontSize: 30,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 35),
+                      SizedBox(height: 30),
                       //form para correo
                       Text(
                         'Correo',
                         style: TextStyle(
-                          fontSize: 35,
+                          fontSize: 25,
                           color: Color(0xff616161),
                         ),
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 10),
                       TextFormField(
                         validator: (val) =>
                             val!.isEmpty ? 'Escriba el correo' : null,
@@ -84,16 +84,16 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 25),
+                      SizedBox(height: 20),
                       //form para password
                       Text(
                         'Contraseña',
                         style: TextStyle(
-                          fontSize: 35,
+                          fontSize: 25,
                           color: Color(0xff616161),
                         ),
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 10),
                       TextFormField(
                         validator: (val) =>
                             val!.isEmpty ? 'Escriba la contraseña' : null,
@@ -121,7 +121,7 @@ class _SignUpState extends State<SignUp> {
                               borderRadius: BorderRadius.circular(25)),
                         ),
                       ),
-                      SizedBox(height: 35),
+                      SizedBox(height: 30),
                       Center(
                         child: Text(
                           '$error',
@@ -130,7 +130,7 @@ class _SignUpState extends State<SignUp> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 25),
+                      SizedBox(height: 20),
                       Center(
                         //boton entrar
                         child: ElevatedButton(
