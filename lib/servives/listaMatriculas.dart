@@ -78,18 +78,17 @@ class _ListaMatriculasState extends State<ListaMatriculas> {
     final matriculas = List<Matricula>.generate(30, (int i) => Matricula(
         matricula: 'matricula $i',
         modelo: 'modelo',
-        hora: DateTime.now().toString(),
+        hora: DateTime.now().toString().substring(0,16),
         marca: 'marca',
         color: 'color',
         entrada: 'E1',
         uid: 'uid',
         sospecha: false,
-        salida: false
+        salida: true
       ),);
 
     return Scrollbar(
       isAlwaysShown: true,
-      thickness: 15,
       controller: _controller,
       child: ListView.builder(
         controller: _controller,

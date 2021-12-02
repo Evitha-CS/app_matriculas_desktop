@@ -2,6 +2,7 @@ import 'package:app_matriculas_desktop/models/matricula.dart';
 import 'package:app_matriculas_desktop/screens/buscar.dart';
 import 'package:app_matriculas_desktop/servives/auth.dart';
 import 'package:app_matriculas_desktop/servives/database.dart';
+import 'package:app_matriculas_desktop/servives/generarExcel.dart';
 import 'package:app_matriculas_desktop/servives/listaMatriculas.dart';
 import 'package:app_matriculas_desktop/widgets/displayOpciones.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +103,9 @@ class _HomeState extends State<Home> {
                         ),
                         InkWell(
                           child: displayOpciones(context, 'Generar Excel', false),
-                          onTap: () {},
+                          onTap: () {
+                            generarExcel(context);
+                          },
                         ),
                         Divider(),
                         Expanded(
