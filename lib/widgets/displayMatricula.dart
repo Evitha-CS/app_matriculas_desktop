@@ -2,7 +2,8 @@ import 'package:app_matriculas_desktop/models/entradas.dart';
 import 'package:app_matriculas_desktop/models/matricula.dart';
 import 'package:flutter/material.dart';
 
-Widget displayMatricula(BuildContext context, int index, List<Matricula> lista) {
+Widget displayMatricula(
+    BuildContext context, int index, List<Matricula> lista) {
   final double alto = MediaQuery.of(context).size.height;
   final double ancho = MediaQuery.of(context).size.width;
 

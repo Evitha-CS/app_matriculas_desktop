@@ -26,8 +26,7 @@ class _SignUpState extends State<SignUp> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage('spikes.png'),
-              repeat: ImageRepeat.repeat),
+              image: AssetImage('spikes.png'), repeat: ImageRepeat.repeat),
           //Background pattern from Toptal Subtle Patterns
         ),
         child: Align(
@@ -147,12 +146,12 @@ class _SignUpState extends State<SignUp> {
                           },
                           child: Text(
                             'Entrar',
-                            style: TextStyle(color: Colors.black, fontSize: 30),
+                            style: TextStyle(color: Colors.white, fontSize: 30),
                           ),
                           style: ElevatedButton.styleFrom(
                             shadowColor: Colors.transparent,
                             minimumSize: Size(250, 70),
-                            primary: Color(0xff79B4B7),
+                            primary: Color(0xff3D56B2),
                             elevation: 0,
                             shape: StadiumBorder(),
                           ),

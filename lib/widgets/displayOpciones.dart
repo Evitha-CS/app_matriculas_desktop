@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-Widget displayOpciones(BuildContext context, String opcion, bool selected) {
+Widget displayOpciones(
+    BuildContext context, String opcion, bool selected, IconData icono) {
   final double alto = MediaQuery.of(context).size.height;
   final double ancho = MediaQuery.of(context).size.width;
 
@@ -15,12 +16,23 @@ Widget displayOpciones(BuildContext context, String opcion, bool selected) {
       padding: const EdgeInsets.only(left: 10),
       child: Align(
         alignment: Alignment.centerLeft,
-        child: Text(
-          '$opcion',
-          style: GoogleFonts.ubuntu(
-        fontSize: 25,
-        color: selected? Colors.black : Colors.grey,
-          ),
+        child: Row(
+          children: [
+            Container(
+              child: Icon(
+                icono,
+                color: selected ? Colors.black : Colors.grey,
+              ),
+              padding: EdgeInsets.all(10),
+            ),
+            Text(
+              '$opcion',
+              style: GoogleFonts.ubuntu(
+                fontSize: 25,
+                color: selected ? Colors.black : Colors.grey,
+              ),
+            ),
+          ],
         ),
       ),
     ),

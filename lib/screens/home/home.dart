@@ -8,6 +8,8 @@ import 'package:app_matriculas_desktop/widgets/displayOpciones.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
+import 'package:file_picker/file_picker.dart';
+import 'package:app_matriculas_desktop/servives/googleDrive.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _auth = AuthService();
+  final drive = GoogleDrive();
   bool _loading = false;
   bool _buscar = false;
   int _indexMenu = 0;
@@ -54,8 +57,8 @@ class _HomeState extends State<Home> {
       //body
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage('papyrus.png'), repeat: ImageRepeat.repeat)
-        ),
+            image: DecorationImage(
+                image: AssetImage('papyrus.png'), repeat: ImageRepeat.repeat)),
         child: _loading
             ? SpinKitFadingCircle(
                 color: Colors.red[800],
@@ -68,7 +71,8 @@ class _HomeState extends State<Home> {
                     decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border(
-                            right: BorderSide(color: Colors.black, width: 2))),
+                            right:
+                                BorderSide(color: Colors.black54, width: 2))),
                     child: Column(
                       children: [
                         Padding(
@@ -86,25 +90,35 @@ class _HomeState extends State<Home> {
                         ),
                         Divider(),
                         InkWell(
-                          child: displayOpciones(
-                              context, 'Lista Matrículas', !_buscar),
+                          child: displayOpciones(context, 'Lista Matrículas',
+                              !_buscar, Icons.list_sharp),
                           onTap: () {
                             _buscar = false;
                             setState(() {});
                           },
                         ),
                         InkWell(
-                          child: displayOpciones(
-                              context, 'Buscar Matrículas', _buscar),
+                          child: displayOpciones(context, 'Buscar Matrículas',
+                              _buscar, Icons.search),
                           onTap: () {
                             _buscar = true;
                             setState(() {});
                           },
                         ),
                         InkWell(
-                          child: displayOpciones(context, 'Generar Excel', false),
+                          child: displayOpciones(context, 'Generar Excel',
+                              false, Icons.description_outlined),
                           onTap: () {
                             generarExcel(context);
+                          },
+                        ),
+                        InkWell(
+                          child: displayOpciones(context, 'Subir a Drive',
+                              false, Icons.add_to_drive),
+                          onTap: () async {
+                            //Falta arreglar esto
+                            var file = await FilePicker.platform.pickFiles();
+                            //await drive.upload(file);
                           },
                         ),
                         Divider(),
@@ -112,8 +126,8 @@ class _HomeState extends State<Home> {
                           child: Align(
                             alignment: Alignment.bottomLeft,
                             child: InkWell(
-                              child: displayOpciones(
-                                  context, 'Cerrar Sesión', false),
+                              child: displayOpciones(context, 'Cerrar Sesión',
+                                  false, Icons.exit_to_app_rounded),
                               onTap: () async {
                                 await _auth.signOut();
                               },
