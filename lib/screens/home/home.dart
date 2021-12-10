@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:app_matriculas_desktop/models/matricula.dart';
 import 'package:app_matriculas_desktop/screens/buscar.dart';
 import 'package:app_matriculas_desktop/servives/auth.dart';
@@ -117,8 +119,15 @@ class _HomeState extends State<Home> {
                               false, Icons.add_to_drive),
                           onTap: () async {
                             //Falta arreglar esto
-                            var file = await FilePicker.platform.pickFiles();
-                            //await drive.upload(file);
+                            FilePickerResult? result =
+                                await FilePicker.platform.pickFiles(
+                              type: FileType.custom,
+                              allowedExtensions: ['xlsx'],
+                            );
+                            if (result != null) {
+                              File file = File(result.files.single.path!);
+                              await drive.upload(file);
+                            }
                           },
                         ),
                         Divider(),
